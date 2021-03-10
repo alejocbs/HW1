@@ -6,7 +6,7 @@ def init_state():
     robot_location = "home"  # set the robot initial location to home
     # Define and validate how many parts are inside the bins
     while True:
-        red, green, blue = input("""How many red/green/blue parts are in the bins?""").split()
+        red, green, blue = input("""How many red/green/blue parts are in the bins?""") or "10 10 10".split()
         if int(red) > 10 or int(green) > 10 or int(blue) > 10:
             print("Number of parts incorrect. Max number of part per color is 10")
             print("try again")
@@ -15,7 +15,7 @@ def init_state():
             break
     # Define and validate how many parts are already in kit tray
     while True:
-        red, green, blue = input("""How many red/green/blue parts are already in the kit tray?""").split()
+        red, green, blue = input("""How many red/green/blue parts are already in the kit tray?""") or "1 1 1".split()
         if int(red) > 10 or int(green) > 10 or int(blue) > 10:
             print("Number of parts incorrect. Max number of part per color is 10")
             print("try again")
@@ -24,7 +24,7 @@ def init_state():
             break
     # Define and validate how many parts are going to be placed in tray
     while True:
-        red, green, blue = input("""How many red/green/blue parts to be placed in the kit tray?""").split()
+        red, green, blue = (input("""How many red/green/blue parts to be placed in the kit tray?""") or "4 1 1").split()
         if (int(red) - tray["red"]) > bins["red"]:  # Compare wanted red  parts
             print("Not enough parts for kitting: ", red, "needed, ", bins["red"], "available.")
             execute = False
@@ -41,27 +41,34 @@ def init_state():
 
 
 # Check for trip optimizer
-def check_two_parts(_tray, _to_place, _key):
-    if _to_place % 2 == 0:
+def check_two_parts(_tray, _to_place,_key):
+    global arm, count
+    if (_to_place[_key]-_tray[_key]) >1:
         arm = ["left", "right"]
+        count=2
     else:
         arm = ["left"]
+        count=1
     return arm
 
 
 # Robot actions
+
 def pick(arm: str, empty_gripper: bool, part: str):
-    print(f"Pick {part} part with the {arm} arm")
-    ud = {part: bins[part] - 1}
-    bins.update(ud)
-    gripper = True
+    for i in range(count):
+        print(f"Pick {part} part with the {arm[i]} arm")
+        ud = {part: bins[part] - 1}
+        bins.update(ud)
+        gripper = True
     return gripper
 
 
 def place(arm: str, empty_gripper: bool, part: str):
-    print("place ", part, " with ", arm, " arm")
-    ud = {part: tray[part] + 1}
-    tray.update(ud)
+    for i in range(count):
+        print("place ", part, " with ", arm[i], " arm")
+
+        ud = {part: tray[part] + 1}
+        tray.update(ud)
     # set gripper to empty
     gripper = False
     return gripper
