@@ -1,7 +1,7 @@
 # ENPM809E Kitting Project
 ## Implementation of offline planning for 
 Example of desire function:
-    ![alt text](https://github.com/alejocbs/ENPM661-Project3_Phase_2/blob/master/map.png "Example")
+    ![alt text](https://github.com/alejocbs/HW1/Example.png "Example")
 ## Libraries used
     1) tqdm ( optional for running)
  Warning - if dont want to use if comment lane 13 and 14 from taskexecution.py
