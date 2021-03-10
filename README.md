@@ -14,8 +14,8 @@ Example of desire function:
 ## How to run the code-
  ### System Requirements-
         Python v3.0.x or later
-### Open the foile named taskexecution.py 
- ### Run! 
+### Open the file named taskexecution.py  located inside rwa1/taskexecution folder
+#### Run! 
 ### Input arguements-
  #### For inputs the max number of parts in each bin is 10.
 ## The program will validate the entry but if no argument is entered default values will be assigned.
