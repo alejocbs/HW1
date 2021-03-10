@@ -23,6 +23,8 @@ Example of desire function:
        2) How many red/green/blue parts are in the tray? - default (1 1 1)
        3)How many red/green/blue parts to be place? - default (10 10 10)
 
+### Github link:
+https://github.com/alejocbs/HW1.git
         
    
    
